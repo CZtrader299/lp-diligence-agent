@@ -1,3 +1,14 @@
+// Resolve API base URL for the calling context.
+// - Browser (typeof window !== "undefined"): use relative paths so Next's
+//   rewrites() proxy to the backend.
+// - Server Components / Route Handlers: prefix with the backend URL directly
+//   since rewrites() doesn't apply to server-side fetches.
+function apiUrl(path: string): string {
+  if (typeof window !== "undefined") return path;
+  const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  return `${base}${path}`;
+}
+
 export type DocMeta = {
   doc_id: string;
   entity: string;
@@ -31,21 +42,21 @@ export type ChecklistAnswer = {
 };
 
 export async function fetchDocuments(): Promise<DocMeta[]> {
-  const r = await fetch("/api/documents");
+  const r = await fetch(apiUrl("/api/documents"), { cache: "no-store" });
   if (!r.ok) throw new Error("Failed to fetch documents");
   const data = await r.json();
   return data.documents;
 }
 
 export async function fetchChecklistItems(): Promise<{ id: string; question: string }[]> {
-  const r = await fetch("/api/checklist/items");
+  const r = await fetch(apiUrl("/api/checklist/items"), { cache: "no-store" });
   if (!r.ok) throw new Error("Failed to fetch checklist items");
   const data = await r.json();
   return data.items;
 }
 
 export async function runChecklist(doc_id: string): Promise<ChecklistAnswer[]> {
-  const r = await fetch("/api/checklist/run", {
+  const r = await fetch(apiUrl("/api/checklist/run"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ doc_id }),
@@ -59,7 +70,7 @@ export async function runChecklist(doc_id: string): Promise<ChecklistAnswer[]> {
 }
 
 export async function askDocument(doc_id: string, question: string): Promise<ChecklistAnswer> {
-  const r = await fetch("/api/ask", {
+  const r = await fetch(apiUrl("/api/ask"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ doc_id, question }),

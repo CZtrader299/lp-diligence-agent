@@ -94,7 +94,7 @@ lp-diligence ingest
 lp-diligence checklist PSERS_HL_2Q17
 ```
 
-For Claude Desktop MCP integration, see `docs/mcp-setup.md`.
+For Claude Desktop MCP integration, see `docs/mcp-setup.md`. For running the full Next.js + FastAPI demo locally and sharing it via Cloudflare Tunnel, see [`docs/demo.md`](docs/demo.md).
 
 ## Eval results
 
