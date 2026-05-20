@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Env
+.env
+.env.local
+*.key
+
+# Build artifacts
+dist/
+build/
+*.db
+*.sqlite
+*.sqlite3
+
+# Caches
+.cache/
+data/cache/
+data/embeddings/
+
+# Node
+node_modules/
+.next/
+out/
+.turbo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Eval outputs (regenerated locally; the published baseline is committed under eval/published/)
+eval/reports/
+eval/runs/

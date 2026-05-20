@@ -1,0 +1,44 @@
+[project]
+name = "lp-diligence-agent"
+version = "0.1.0"
+description = "Agentic AI diligence over LP-format private-equity quarterly reports"
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Dan Krawczun", email = "krawczun@gmail.com" }]
+
+dependencies = [
+    "anthropic>=0.40.0",
+    "pydantic>=2.5",
+    "python-dotenv>=1.0",
+    "pypdf>=4.0",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "sqlite-vec>=0.1.6",
+    "numpy>=1.26",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "mcp>=1.0",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers>=2.5"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.4"]
+
+[project.scripts]
+lp-diligence = "lp_diligence.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lp_diligence"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
