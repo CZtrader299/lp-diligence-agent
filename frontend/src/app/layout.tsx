@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/" className="hover:text-white">Reports</a>
                 <a href="/about" className="hover:text-white">About</a>
                 <a
-                  href="https://github.com/CZtrader299/lp-diligence-agent"
+                  href="https://github.com/krawczun/lp-diligence-agent"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-white"

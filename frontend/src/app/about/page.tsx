@@ -25,7 +25,7 @@ export default function AboutPage() {
       </ul>
       <p>
         <a
-          href="https://github.com/CZtrader299/lp-diligence-agent"
+          href="https://github.com/krawczun/lp-diligence-agent"
           className="text-[var(--accent)] hover:underline"
         >
           Source on GitHub →

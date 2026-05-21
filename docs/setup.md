@@ -16,7 +16,7 @@ python --version
 
 ```powershell
 cd C:\Users\krawc\projects
-git clone https://github.com/CZtrader299/lp-diligence-agent
+git clone https://github.com/krawczun/lp-diligence-agent
 cd lp-diligence-agent
 ```
 
