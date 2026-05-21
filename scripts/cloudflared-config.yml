@@ -1,0 +1,15 @@
+# Cloudflare named tunnel config for the LP Diligence Agent demo.
+#
+# Routes lp-diligence.krawczun.com to the local Next.js dev server (port 3003).
+# The frontend proxies /api/* to the FastAPI backend on :8000 via Next's
+# rewrites(), so a single hostname covers both surfaces.
+#
+# Run with: cloudflared tunnel --config scripts/cloudflared-config.yml run lp-diligence
+
+tunnel: c635abcb-b7e8-444f-b374-4cc31c1b2af2
+credentials-file: C:\Users\krawc\.cloudflared\c635abcb-b7e8-444f-b374-4cc31c1b2af2.json
+
+ingress:
+  - hostname: lp-diligence.krawczun.com
+    service: http://localhost:3003
+  - service: http_status:404

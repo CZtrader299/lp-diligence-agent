@@ -56,10 +56,14 @@ export async function fetchChecklistItems(): Promise<{ id: string; question: str
 }
 
 export async function runChecklist(doc_id: string): Promise<ChecklistAnswer[]> {
+  // 9 sequential LLM calls can take 30-60s; use a generous client-side
+  // timeout (AbortSignal.timeout) so the browser doesn't drop the response
+  // mid-flight on slow runs.
   const r = await fetch(apiUrl("/api/checklist/run"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ doc_id }),
+    signal: AbortSignal.timeout(120_000),
   });
   if (!r.ok) {
     const detail = await r.text();
